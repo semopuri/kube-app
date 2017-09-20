@@ -1,0 +1,30 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mongoui
+  namespace: tools
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: mongoui
+    spec:
+      containers:
+      - name: mongoui
+        image: mongoclient/mongoclient:2.1.0
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 300m
+            memory: 0.5G
+          limits:
+            cpu: 300m
+            memory: 0.5G
+        ports:
+        - containerPort: 3000
+          protocol: TCP
